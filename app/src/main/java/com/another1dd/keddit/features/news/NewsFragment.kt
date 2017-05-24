@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import com.another1dd.keddit.R
 import com.another1dd.keddit.commons.Extensions.inflate
 import com.another1dd.keddit.commons.RxBaseFragment
-import com.another1dd.keddit.commons.adapter.NewsAdapter
+import com.another1dd.keddit.features.news.adapter.NewsAdapter
 import kotlinx.android.synthetic.main.fragment_news.*
 import rx.schedulers.Schedulers
 

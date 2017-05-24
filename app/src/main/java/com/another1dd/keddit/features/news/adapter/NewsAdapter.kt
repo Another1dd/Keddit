@@ -1,9 +1,12 @@
-package com.another1dd.keddit.commons.adapter
+package com.another1dd.keddit.features.news.adapter
 
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.another1dd.keddit.commons.RedditNewsItem
+import com.another1dd.keddit.commons.adapter.AdapterConstants
+import com.another1dd.keddit.commons.adapter.ViewType
+import com.another1dd.keddit.commons.adapter.ViewTypeDelegateAdapter
 
 class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
