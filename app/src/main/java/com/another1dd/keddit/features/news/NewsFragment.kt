@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.another1dd.keddit.R
 import com.another1dd.keddit.commons.Extensions.inflate
+import com.another1dd.keddit.commons.InfiniteScrollListener
+import com.another1dd.keddit.commons.RedditNews
 import com.another1dd.keddit.commons.RxBaseFragment
 import com.another1dd.keddit.features.news.adapter.NewsAdapter
 import kotlinx.android.synthetic.main.fragment_news.*
@@ -17,6 +19,7 @@ import rx.schedulers.Schedulers
 
 class NewsFragment : RxBaseFragment() {
 
+    private var redditNews: RedditNews? = null
     private val newsManager by lazy { NewsManager() }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -29,7 +32,10 @@ class NewsFragment : RxBaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         news_list.setHasFixedSize(true)
-        news_list.layoutManager = LinearLayoutManager(context)
+        val linearLayout = LinearLayoutManager(context)
+        news_list.layoutManager = linearLayout
+        news_list.clearOnScrollListeners()
+        news_list.addOnScrollListener(InfiniteScrollListener({ requestNews() }, linearLayout))
 
         initAdapter()
 
@@ -39,11 +45,12 @@ class NewsFragment : RxBaseFragment() {
     }
 
     private fun requestNews() {
-        val subscription = newsManager.getNews()
+        val subscription = newsManager.getNews(redditNews?.after ?: "")
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                         { retrievedNews ->
-                            (news_list.adapter as NewsAdapter).addNews(retrievedNews)
+                            redditNews = retrievedNews
+                            (news_list.adapter as NewsAdapter).addNews(retrievedNews.news)
                         },
                         { e ->
                             Snackbar.make(news_list, e.message ?: "", Snackbar.LENGTH_LONG).show()
