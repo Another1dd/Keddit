@@ -3,6 +3,7 @@ package com.another1dd.keddit.commons.adapter
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import com.another1dd.keddit.commons.RedditNewsItem
 
 class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

@@ -3,22 +3,25 @@ package com.another1dd.keddit.commons.adapter
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.another1dd.keddit.R
+import com.another1dd.keddit.commons.Extensions.getFriendlyTime
 import com.another1dd.keddit.commons.Extensions.inflate
 import com.another1dd.keddit.commons.Extensions.loadImg
+import com.another1dd.keddit.commons.RedditNewsItem
 import kotlinx.android.synthetic.main.news_item.view.*
 
 
 class NewsDelegateAdapter : ViewTypeDelegateAdapter {
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return TurnsViewHolder(parent)
+        return NewsViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewType) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        holder as NewsViewHolder
+        holder.bind(item as RedditNewsItem)
     }
 
-    class TurnsViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+    class NewsViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
             parent.inflate(R.layout.news_item)) {
 
 
