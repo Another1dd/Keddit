@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import com.another1dd.keddit.R
 import com.another1dd.keddit.commons.Extensions.getFriendlyTime
 import com.another1dd.keddit.commons.Extensions.inflate
+import com.another1dd.keddit.commons.Extensions.loadImg
 import com.another1dd.keddit.commons.RedditNewsItem
 import com.another1dd.keddit.commons.adapter.ViewType
 import com.another1dd.keddit.commons.adapter.ViewTypeDelegateAdapter
+import kotlinx.android.synthetic.main.news_item.view.*
 
 
 class NewsDelegateAdapter : ViewTypeDelegateAdapter {
@@ -26,11 +28,11 @@ class NewsDelegateAdapter : ViewTypeDelegateAdapter {
 
 
         fun bind(item: RedditNewsItem) = with(itemView){
-            kotlinx.android.synthetic.main.news_item.view.img_thumbnail.loadImg(item.thumbnail)
-            kotlinx.android.synthetic.main.news_item.view.description.text = item.title
-            kotlinx.android.synthetic.main.news_item.view.author.text = item.author
-            kotlinx.android.synthetic.main.news_item.view.comments.text = "${item.numComments} comments"
-            kotlinx.android.synthetic.main.news_item.view.time.text = item.created.getFriendlyTime()
+            img_thumbnail.loadImg(item.thumbnail)
+            description.text = item.title
+            author.text = item.author
+            comments.text = "${item.numComments} comments"
+            time.text = item.created.getFriendlyTime()
     }
 }
 
