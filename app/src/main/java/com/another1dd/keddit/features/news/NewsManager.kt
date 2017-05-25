@@ -1,11 +1,14 @@
 package com.another1dd.keddit.features.news
 
-import com.another1dd.keddit.api.RestAPI
+import com.another1dd.keddit.api.NewsAPI
 import com.another1dd.keddit.commons.RedditNews
 import com.another1dd.keddit.commons.RedditNewsItem
 import rx.Observable
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class NewsManager(private val api: RestAPI = RestAPI()) {
+@Singleton
+class NewsManager @Inject constructor(private val api: NewsAPI) {
 
     fun getNews(after: String, limit: String = "10"): Observable<RedditNews> {
         return Observable.create {
