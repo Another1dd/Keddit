@@ -2,6 +2,7 @@ package com.another1dd.keddit.commons
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.another1dd.keddit.commons.Extensions.createParcel
 import com.another1dd.keddit.commons.adapter.AdapterConstants
 import com.another1dd.keddit.commons.adapter.ViewType
 
@@ -11,10 +12,8 @@ data class RedditNews(
         val before: String,
         val news: List<RedditNewsItem>) : Parcelable {
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<RedditNews> = object : Parcelable.Creator<RedditNews> {
-            override fun createFromParcel(source: Parcel): RedditNews = RedditNews(source)
-            override fun newArray(size: Int): Array<RedditNews?> = arrayOfNulls(size)
-        }
+        @JvmField @Suppress("unused")
+        val CREATOR = createParcel { RedditNews(it) }
     }
 
     constructor(source: Parcel) : this(source.readString(), source.readString(), source.createTypedArrayList(RedditNewsItem.CREATOR))
@@ -40,10 +39,8 @@ data class RedditNewsItem(
     override fun getViewType() = AdapterConstants.NEWS
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<RedditNewsItem> = object : Parcelable.Creator<RedditNewsItem> {
-            override fun createFromParcel(source: Parcel): RedditNewsItem = RedditNewsItem(source)
-            override fun newArray(size: Int): Array<RedditNewsItem?> = arrayOfNulls(size)
-        }
+        @JvmField @Suppress("unused")
+        val CREATOR = createParcel { RedditNewsItem(it) }
     }
 
     constructor(source: Parcel) : this(source.readString(), source.readString(), source.readInt(), source.readLong(), source.readString(), source.readString())
